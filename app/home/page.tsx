@@ -1,11 +1,12 @@
 import React from 'react';
-import { FaBeer } from "react-icons/fa";
+import MainMovie from "@/app/components/main-movie";
+import MovieList from "@/app/components/movie-list";
 const Page = () => {
     return (
-        <div className="text-4xl text-blue-400">
-                HELLO WORLD
-            <FaBeer />
-        </div>
+            <div>
+                <MainMovie/>
+                <MovieList/>
+            </div>
     );
 };
 
