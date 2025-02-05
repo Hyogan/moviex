@@ -339,3 +339,12 @@ public function up()
         $table->timestamps();
     });
 }
+
+
+php artisan make:controller auth/login
+php artisan make:controller auth/RegisterController
+php artisan make:controller auth/ForgotPasswordController
+php artisan make:controller auth/ResetPasswordController
+php artisan make:controller auth/VerificationController
+php artisan make:controller auth/ProfileController
+php artisan make:controller auth/AuthTokenController
