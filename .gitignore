@@ -45,4 +45,5 @@ next-env.d.ts
 /moviex-backend/.env
 /moviex-backend/storage/
 /moviex-backend/public/storage/
+/moviex-backend/public/build
 

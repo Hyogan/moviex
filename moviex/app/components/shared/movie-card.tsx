@@ -6,7 +6,7 @@ import {FaPlay} from "react-icons/fa";
 interface movieCardProps{
     movie: Movie
 }
-const MovieCard:  React.FC<movieCardProps>= ({movie}) => {
+const MovieCard:  React.FC<movieCardProps> = ({movie}) => {
     const truncateText = (text: string, maxLength: number = 50, replacementChar: string = '...') => {
         if(text.length > maxLength)
             return `${text.substring(0,maxLength)}${replacementChar}`
@@ -21,7 +21,7 @@ const MovieCard:  React.FC<movieCardProps>= ({movie}) => {
         //     <p><strong>Duration:</strong> {movie.duration}</p>
         //     <p><strong>Rating:</strong> {movie.rating} / 10</p>
         // </div>
-        <div className="relative max-w-sm rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-2xl transition hover:scale-105 duration-700">
+        <div className="overflow-hidden relative max-w-sm bg-white rounded-lg shadow-lg transition duration-700 hover:shadow-2xl hover:scale-105">
             {/* Image with absolute positioning */}
             <div className="relative w-[250px] h-[330px]">
                 <Image
@@ -36,17 +36,17 @@ const MovieCard:  React.FC<movieCardProps>= ({movie}) => {
             </div>
 
             {/* Overlay content on top of the image */}
-            <div className="top-0 left-0 p-2  absolute">
-                <p className="p-4 bg-white cursor-pointer text-high_darkblue w-fit rounded-full hover:text-white hover:bg-high_darkblue transition duration-700">
+            <div className="absolute top-0 left-0 p-2">
+                <p className="p-4 bg-white rounded-full transition duration-700 cursor-pointer text-high_darkblue w-fit hover:text-white hover:bg-high_darkblue">
                     <FaPlay/>
                 </p>
             </div>
-            <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black to-transparent text-white">
+            <div className="absolute bottom-0 left-0 p-4 w-full text-white bg-gradient-to-t from-black to-transparent">
                 <h3 className="text-xl font-semibold">{movie.title}</h3>
-                <p className="text-sm mt-2 truncate">{truncateText(movie.description)}</p>
+                <p className="mt-2 text-sm truncate">{truncateText(movie.description)}</p>
                 <div className="flex justify-between items-center mt-4">
                     <div className="flex items-center">
-            <span className="bg-yellow-400 text-white text-xs font-semibold rounded-full px-2 py-1 mr-2">
+            <span className="px-2 py-1 mr-2 text-xs font-semibold text-white bg-yellow-400 rounded-full">
               {movie.rating.toFixed(1)}
             </span>
                         <span className="text-xs">{movie.releaseDateFormatted}</span>
@@ -55,7 +55,7 @@ const MovieCard:  React.FC<movieCardProps>= ({movie}) => {
                         href={movie.homepage ?? ''}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-500 text-xs font-semibold hover:underline"
+                        className="text-xs font-semibold text-blue-500 hover:underline"
                     >
                         More Info
                     </a>

@@ -1,7 +1,7 @@
 'use client'
 import {Movie} from "@/app/interfaces/common";
 import {useState} from "react";
-import Modal from "@/app/components/utils/modal";
+import Modal from "@/app/components/shared/modal";
 import { FaPlay } from 'react-icons/fa';
 import { FaDownload } from 'react-icons/fa';
 
@@ -34,7 +34,7 @@ const MainMovie = () => {
         <div>
             {/*<span> {movie.title}</span>*/}
             <div
-                className={`inset-0 h-[450px] rounded-xl w-full flex flex-col items-start justify-start transition-opacity duration-500`}
+                className={`flex inset-0 flex-col justify-start items-start w-full rounded-xl transition-opacity duration-500 h-[450px]`}
                 style={{
                     background: 'none', // Reset the shorthand background property
                     backgroundColor: 'black', // Optional, if you want a base background color
@@ -44,25 +44,25 @@ const MainMovie = () => {
                     backgroundSize: 'cover',
                 }}
             >
-                <div className=" inset-0 bg-black bg-opacity-100"></div>
+                <div className="inset-0 bg-black bg-opacity-100"></div>
                 {/* Overlay */}
                 <div className="relative max-w-[60%] z-10 flex flex-col items-start h-full w-full pl-1 md:pl-20 justify-end py-2">
-                    <div className="w-full gap-2 flex mb-4 items-center">
+                    <div className="flex gap-2 items-center mb-4 w-full">
                         {movie.categories.map((category,id) => (
-                            <span key={id} className="px-4 py-1 text-white rounded-full shadow-lg bg-white bg-opacity-20 backdrop-blur-lg hover:scale-105 hover:bg-blue-700/20 transition-transform duration-300">{category}</span>
+                            <span key={id} className="px-4 py-1 text-white bg-white bg-opacity-20 rounded-full shadow-lg backdrop-blur-lg transition-transform duration-300 hover:scale-105 hover:bg-blue-700/20">{category}</span>
                         ))}
                     </div>
                     <h1 className="text-5xl font-bold text-white drop-shadow-lg">{movie.title}</h1>
-                    <p className="mt-4 text-md text-white drop-shadow-md">{truncate(movie.description, 150)}</p>
-                    <div className="flex w-full items-start gap-4 my-4">
+                    <p className="mt-4 text-white drop-shadow-md text-md">{truncate(movie.description, 150)}</p>
+                    <div className="flex gap-4 items-start my-4 w-full">
                         <button
                             onClick={openModal}
-                            className="flex items-center gap-3 px-8 py-4 rounded-full  shadow-lg bg-white backdrop-blur-lg hover:scale-105 text-smooth_darkblue transition-transform duration-300">
+                            className="flex gap-3 items-center px-8 py-4 bg-white rounded-full shadow-lg backdrop-blur-lg transition-transform duration-300 hover:scale-105 text-smooth_darkblue">
                             <FaPlay /><span>Watch</span>
                         </button>
                         <button
                             onClick={openModal}
-                            className="flex items-center gap-3 px-8 py-4 rounded-full  shadow-lg bg-transparent text-white border-2 backdrop-blur-lg hover:scale-105  transition-transform duration-300">
+                            className="flex gap-3 items-center px-8 py-4 text-white bg-transparent rounded-full border-2 shadow-lg backdrop-blur-lg transition-transform duration-300 hover:scale-105">
                             <FaDownload /> <span>Download</span>
                         </button>
                     </div>
@@ -70,10 +70,10 @@ const MainMovie = () => {
             </div>
 
             <Modal isOpen={isModalOpen} onClose={closeModal}>
-                <h2 className="text-2xl font-semibold mb-4 text-center text-white">Information Unavailable</h2>
-                <p className="text-gray-200 text-center mb-6">
+                <h2 className="mb-4 text-2xl font-semibold text-center text-white">Information Unavailable</h2>
+                <p className="mb-6 text-center text-gray-200">
                     The details for this place are not yet available, please come later, or
-                    <a href="/contact" className="text-blue-400 hover:text-blue-600 mx-1">
+                    <a href="/contact" className="mx-1 text-blue-400 hover:text-blue-600">
                         contact us
                     </a>
                     to provide any relevant information about it.
@@ -81,7 +81,7 @@ const MainMovie = () => {
                 <div className="flex justify-center">
                     <button
                         onClick={closeModal}
-                        className="px-6 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-all ease-in-out duration-300"
+                        className="px-6 py-2 text-white bg-red-600 rounded-full transition-all duration-300 ease-in-out hover:bg-red-700"
                     >
                         Close
                     </button>

@@ -103,5 +103,50 @@
     "runtime": 161,
     "tagline": "The world will be forever changed.",
     "homepage": "https://www.marvel.com/blackpanther"
+  },
+  {
+    "id": 8,
+    "title": "Black Panther: Wakanda Forever",
+    "description": "Wakanda must defend itself from foreign threats following the death of its king, and a new hero emerges to protect the nation.",
+    "categories": ["Action", "Adventure", "Drama", "Sci-Fi"],
+    "duration": "2h 41m",
+    "poster": "/images/blackpanther2.png",
+    "rating": 7.4,
+    "releaseDate": "2022-11-11",
+    "releaseDateFormatted": "November 11, 2022",
+    "genres": ["Action", "Adventure", "Drama", "Sci-Fi"],
+    "runtime": 161,
+    "tagline": "The world will be forever changed.",
+    "homepage": "https://www.marvel.com/blackpanther"
+  },
+  {
+    "id": 9,
+    "title": "Black Panther: Wakanda Forever",
+    "description": "Wakanda must defend itself from foreign threats following the death of its king, and a new hero emerges to protect the nation.",
+    "categories": ["Action", "Adventure", "Drama", "Sci-Fi"],
+    "duration": "2h 41m",
+    "poster": "/images/blackpanther2.png",
+    "rating": 7.4,
+    "releaseDate": "2022-11-11",
+    "releaseDateFormatted": "November 11, 2022",
+    "genres": ["Action", "Adventure", "Drama", "Sci-Fi"],
+    "runtime": 161,
+    "tagline": "The world will be forever changed.",
+    "homepage": "https://www.marvel.com/blackpanther"
+  },
+  {
+    "id": 10,
+    "title": "Black Panther: Wakanda Forever",
+    "description": "Wakanda must defend itself from foreign threats following the death of its king, and a new hero emerges to protect the nation.",
+    "categories": ["Action", "Adventure", "Drama", "Sci-Fi"],
+    "duration": "2h 41m",
+    "poster": "/images/blackpanther2.png",
+    "rating": 7.4,
+    "releaseDate": "2022-11-11",
+    "releaseDateFormatted": "November 11, 2022",
+    "genres": ["Action", "Adventure", "Drama", "Sci-Fi"],
+    "runtime": 161,
+    "tagline": "The world will be forever changed.",
+    "homepage": "https://www.marvel.com/blackpanther"
   }
 ]

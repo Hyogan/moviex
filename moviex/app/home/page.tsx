@@ -3,11 +3,11 @@ import MainMovie from "@/app/components/main-movie";
 import MovieList from "@/app/components/movie-list";
 const Page = () => {
     return (
-            <div>
+            <div className="pb-32">
                 <MainMovie/>
                 <MovieList/>
             </div>
     );
+    
 };
-
 export default Page;
