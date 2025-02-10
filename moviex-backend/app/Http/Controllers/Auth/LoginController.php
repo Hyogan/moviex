@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -13,14 +14,31 @@ class LoginController extends Controller
     {
         $credentials = $request->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return response()->json(['message' => 'Logged in successfully']);
+        $remember = $request->boolean('remember', false);
+        $user = User::where('email',$credentials['email'])->first();
+        // $credentials['password']=Hash::make(Hash::make($credentials['password']));
+        if (!Auth::attempt($credentials)) {
+            return response()->json(['error' => 'Invalid credentials'], 401);
         }
-        return response()->json(['message','invalid credentials'],401);
+        //get the authenticated user to return 
+        $token = $user->createToken('auth_token', [], $remember ? now()->addDays(30) : now()->addHours(24))->plainTextToken;
+        $cookieTime = $remember ? 60 * 24 * 30 : null;
+        return response()->json([
+                'access_token' => $token, 
+                'token_type' => 'Bearer',
+                'user'=> $user])->withCookie(cookie(
+                    'token', 
+                    $token, 
+                    $cookieTime,
+                    '/',
+                    null,
+                    config('app.env') === 'production',
+                    true
+                ))
+                ->header('Access-Control-Allow-Origin', '*')
+                ->header('Access-Control-Allow-Methods', 'POST');
     }
     public function logout(Request $request)
     {
@@ -28,36 +46,5 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return response()->json(['message' => 'Logged out successfully']);
-    }
-
-
-
-
-
-    public function issueToken(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        $user = User::where('email',$credentials['email'])->first();
-        if (!Auth::attempt($credentials)) {
-            return response()->json(['error' => 'Invalid credentials'], 401);
-        }
-        //get the authenticated user to return 
-        $token = $user->createToken('auth_token')->plainTextToken;
-        return response()->json([
-                'access_token' => $token, 
-                'token_type' => 'Bearer',
-                'user'=> $user])->withCookkie(cookie(
-                    'token', 
-                    $token, 
-                    60 * 24 * 30,
-                    null,
-                    null,
-                    true,
-                    true
-                ));
     }
 }

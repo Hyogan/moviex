@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const loginSchema = z.object({
+ export const loginSchema = z.object({
     email: z 
         .string()
         .min(1, 'Email is required')
@@ -8,10 +8,12 @@ export const loginSchema = z.object({
     password: z
         .string()
         .min(8,'password is required')
-        .min(6,'password must be at least 6 characters')
+        .min(6,'password must be at least 6 characters'),
+    remember: z
+        .boolean()
 });
 
-export const registerSchema  = z.object({
+ export const registerSchema  = z.object({
     name: z 
         .string()
         .min(1,'Name is required')
@@ -29,13 +31,16 @@ export const registerSchema  = z.object({
         .string()
         .min(1, 'Password is required')
         .min(8, 'Password must be at least 8 characters'),
-    confirmPassword: z
+    password_confirmation: z
         .string()
         .min(1, 'Please confirm your password'),
-    profile_picture: z
+    avatar: z
         .any()
-        .optional(),
-}).refine((data) => data.password === data.confirmPassword, {
+        .optional()
+}).refine((data) => data.password === data.password_confirmation, {
     message: "passwords don't match ",
-    path: ["confirmedPassword"]
+    path: ["password_confirmation"]
 })
+
+export type LoginFormData = z.infer<typeof loginSchema>;
+export type RegisterFormData = z.infer<typeof registerSchema>;

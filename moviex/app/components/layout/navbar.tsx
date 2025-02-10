@@ -11,10 +11,12 @@ import { FaUserCircle } from "react-icons/fa";
 import { AiOutlineHistory } from "react-icons/ai";
 import {useSidebar} from "@/context/sidebarContext";
 import {usePathname} from "next/navigation";
+import { useAuth } from '@/context/AuthContext';
 // import {usePathname, useRouter} from 'next/navigation';
 
 const Navbar = ()=>  {
     const { isOpen, toggleSidebar } = useSidebar();
+    const { user } = useAuth();
     const navLinks : Record<string,linkItemProps[]> = {
         generals: [
                 {
@@ -81,10 +83,11 @@ const Navbar = ()=>  {
             >
                 {/* Navigation Links */}
                 <nav className="flex-1">
+                    <div>{user?.name}</div>
                     {Object.entries(navLinks).map(([category, links]) => (
                         <div key={category}>
-                            <ul className="text-white space-y-2 px-1 py-2 border-b-2 border-b-white">
-                                {/*<h2 className="capitalize underline font-bold">{category}</h2>*/}
+                            <ul className="px-1 py-2 space-y-2 text-white border-b-2 border-b-white">
+                                {/*<h2 className="font-bold underline capitalize">{category}</h2>*/}
                                 {links.map((linkElement: linkItemProps) => (
                                     <LinkItem toggleSidebar={toggleSidebar}  key={linkElement.id} linkItem={linkElement}/>
                                 ))}
@@ -94,7 +97,7 @@ const Navbar = ()=>  {
 
                 </nav>
                 {/* Footer */}
-                <div className="p-4 text-sm text-blue-300 border-t bg-red-500 border-blue-700">
+                <div className="p-4 text-sm text-blue-300 bg-red-500 border-t border-blue-700">
                     © 2025 My Website
                 </div>
             </div>
@@ -115,7 +118,7 @@ const LinkItem: React.FC<LinkItemComponentProps> = ({linkItem, toggleSidebar}) =
             <Link
                 onClick={toggleSidebar}
                 href={linkItem.link}
-                className="flex items-center justify-start gap-2 text-sm space-x-2 w-full px-2 py-2 rounded-md hover:bg-high_darkblue transition"
+                className="flex gap-2 justify-start items-center px-2 py-2 space-x-2 w-full text-sm rounded-md transition hover:bg-high_darkblue"
             >
                 <linkItem.icon/>
                 {linkItem.name}

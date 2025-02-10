@@ -1,32 +1,25 @@
 import axios from 'axios';
-import { API_BASE_URL } from '../constants';
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+    },
+    
+    withCredentials: true, // Important for cookies
 });
 
-// Request interceptor
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
-
-// Response interceptor
 api.interceptors.response.use(
-  (response: any) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem('token');
-      window.location.href = '/login';
+    (response) => response,
+    async (error) => {
+        if(error.response?.status === 401 && error.response?.message === 'Unauthenticated' ){
+            window.location.href = '/login'
+            // console.log(error);
+        }
+        return Promise.reject(error);
     }
-    return Promise.reject(error);
-  }
-);
+)
 
 export default api;

@@ -10,13 +10,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <div className="flex justify-center items-center p-4 min-h-screen bg-gradient-to-br from-black to-gray-900">
         <div className="w-full max-w-md">
             {/* Logo */}
-            <Link href="/" className="block mb-8 text-center">
-                <div className="p-4 text-lg font-bold text-white border-b-2 border-white">
-                    <a className="flex justify-center items-center space-x-2 w-full text-center">
-                        <p className="w-[50px] h-[50px] rounded-full bg-white text-blue-900">MX</p>
+            <Link href="/" className="block p-4 mb-8 text-lg font-bold text-center text-white border-b-2 border-white">
+                    <div className="flex justify-center items-center space-x-2 w-full text-center">
+                        <span className="w-[50px] h-[50px] rounded-full bg-white text-blue-900">MX</span>
                         <h1 className="text-2xl" >MovieX</h1>
-                    </a>
-                </div>
+                    </div>
                 <p className="mt-2 text-gray-400">Your Ultimate Movie Experience</p>
             </Link>
             

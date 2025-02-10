@@ -25,8 +25,6 @@ class RegisterController extends Controller
             $imagePath = $image->store('profile_pictures', 'public');
             $registerData['avatar'] = $imagePath;
         }
-        $registerData['password'] = Hash::make($registerData['password']);
-
         $user = User::create([
             'name' => $registerData['name'],
             'username' => $registerData['username'],

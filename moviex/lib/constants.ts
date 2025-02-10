@@ -23,3 +23,12 @@ export const AUTH_ERRORS = {
   EMAIL_EXISTS: 'Email already exists',
   WEAK_PASSWORD: 'Password must be at least 8 characters',
 } as const;
+
+
+export const PUBLIC_ROUTES = [
+  '/',
+  '/login',
+  '/register',
+  '/forgot-password',
+  '/reset-password',
+];

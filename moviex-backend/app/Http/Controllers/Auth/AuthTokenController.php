@@ -24,7 +24,7 @@ class AuthTokenController extends Controller
         return response()->json([
                 'access_token' => $token, 
                 'token_type' => 'Bearer',
-                'user'=> $user])->withCookkie(cookie(
+                'user'=> $user])->withCookie(cookie(
                     'token', 
                     $token, 
                     60 * 24 * 30,

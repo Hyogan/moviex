@@ -4,10 +4,12 @@ import Navbar from "@/app/components/layout/navbar";
 import TopNavbar from "@/app/components/top-navbar";
 import {SidebarProvider, useSidebar} from "@/context/sidebarContext";
 import React from "react";
+import ProtectedRoute from "../components/shared/protectedRoutes";
 
 const LayoutContent = ({children} : {children: React.ReactNode}) => {
     const { isOpen } = useSidebar();
     return (
+        <ProtectedRoute>
             <div className="relative w-full min-h-screen rounded-xl">
                 {/*Background Image */}
                 <div className="absolute inset-0 -z-10">
@@ -39,6 +41,7 @@ const LayoutContent = ({children} : {children: React.ReactNode}) => {
                     </div>
                 </div>
             </div>
+        </ProtectedRoute>
     );
 };
 

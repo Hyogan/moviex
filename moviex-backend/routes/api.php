@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\auth\AuthTokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -11,15 +10,25 @@ use App\Http\Controllers\Auth\VerificationController;
 
 
 Route::get('/user', function (Request $request) {
-    return $request->user();
+    try {
+        $user = $request->user();
+        
+        if (!$user) {
+            return response()->json(['error' => 'Unauthenticated'], 401);
+        }
+
+        return response()->json($user);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Unauthenticated'], 401);
+    }
 })->middleware('auth:sanctum');
 
 
 
 // Public auth routes
-Route::prefix('auth')->group(function () {
+Route::prefix('auth')->group(function (): void {
     Route::post('/register', [RegisterController::class, 'register']);
-    Route::post('/login', [LoginController::class, 'issueToken']);
+    Route::post('/login', [LoginController::class, 'login']);
     Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
     Route::post('/reset-password', [ResetPasswordController::class, 'reset']);
 });
