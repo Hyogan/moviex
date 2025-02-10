@@ -51,31 +51,31 @@ class ProfileController extends Controller
     public function updateProfilePicture(Request $request)
     {
         $request->validate([
-            'profile_picture' => 'required|image|mimes:jpg,jpeg,png|max:1024',
+            'avatar' => 'required|image|mimes:jpg,jpeg,png|max:1024',
         ]);
 
         $user = Auth::user();
-        if ($request->hasFile('profile_picture')) {
+        if ($request->hasFile('avatar')) {
             // Delete the old profile picture if exists
-            if ($user->profile_picture) {
-                Storage::disk('public')->delete($user->profile_picture);
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
             }
-            $image = $request->file('profile_picture');
+            $image = $request->file('avatar');
             $imagePath = $image->store('profile_pictures', 'public');
             // Update the database with the new image path
 
             // auth()->()->update([
-            //     'profile_picture' => $imagePath,
+            //     'avatar' => $imagePath,
             // ]);
             $user = $request->user();
-            $user->update(['profile_picture' => $imagePath]);
+            $user->update(['avatar' => $imagePath]);
             $user->save();
 
         }
 
         return response()->json([
             'message' => 'Profile picture updated successfully',
-            'profile_picture_url' => $user->profile_picture,
+            'avatar' => $user->profilavatare_picture,
         ]);
 
 
@@ -85,7 +85,7 @@ class ProfileController extends Controller
         // KEEP FOR LATER 
 
             // Open the new image and perform any modifications
-            // $image = $request->file('profile_picture');
+            // $image = $request->file('avatar');
             // $imageResized = Image::make($image)->resize(300, 300);  // Resize or manipulate image
 
             // Save the new image

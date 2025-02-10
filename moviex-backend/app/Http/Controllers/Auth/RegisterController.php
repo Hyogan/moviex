@@ -17,13 +17,13 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|in:content_creator,viewer',
-            'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:1024',
+            'avatar' => 'nullable|image|mimes:jpg,jpeg,png|max:1024',
         ]);
 
-        if ($request->hasFile('profile_picture')) {
-            $image = $request->file('profile_picture');
+        if ($request->hasFile('avatar')) {
+            $image = $request->file('avatar');
             $imagePath = $image->store('profile_pictures', 'public');
-            $registerData['profile_picture'] = $imagePath;
+            $registerData['avatar'] = $imagePath;
         }
         $registerData['password'] = Hash::make($registerData['password']);
 
@@ -33,6 +33,7 @@ class RegisterController extends Controller
             'role' => $registerData['role'],
             'email' => $registerData['email'],
             'password' => Hash::make($registerData['password']),
+            'avatar' => $registerData['avatar'] ?? null,
         ]);
         $token = $user->createToken('moviex')->plainTextToken;
 
